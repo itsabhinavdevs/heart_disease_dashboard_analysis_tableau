@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+{% block title %}Insights | Heart Disease Risk Factor Analysis{% endblock %}
+
+{% block content %}
+<!-- PAGE HERO -->
+<section class="page-hero grid-bg">
+  <div class="max-w-4xl mx-auto px-6">
+    <div class="badge mb-6 inline-flex"><i class="fas fa-lightbulb text-xs"></i> Key Findings</div>
+    <h1 class="section-title mb-4">Data Insights</h1>
+    <p class="section-subtitle">Evidence-based findings derived from analysis of 319,000+ patient records, revealing critical patterns in heart disease risk.</p>
+  </div>
+</section>
+
+<!-- KEY STATS -->
+<section class="py-16 px-6 bg-secondary-bg/30">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      {% for num, suffix, label, icon, color in [
+        ('47','%','Men Affected','fas fa-male','#00F5D4'),
+        ('40','%','Smoker Risk Increase','fas fa-smoking','#E63946'),
+        ('62','%','Risk After Age 60','fas fa-user-clock','#F59E0B'),
+        ('2.8','x','Diabetes Risk Multiplier','fas fa-syringe','#8B5CF6'),
+      ] %}
+      <div class="glass-card p-6" data-aos="zoom-in" data-aos-delay="{{ loop.index0 * 100 }}">
+        <i class="{{ icon }} text-2xl mb-3 block" style="color:{{ color }};"></i>
+        <div class="text-4xl font-black mb-1" style="color:{{ color }};">
+          <span data-count="{{ num }}" data-suffix="{{ suffix }}">{{ num }}{{ suffix }}</span>
+        </div>
+        <p class="text-gray-500 text-xs uppercase tracking-widest">{{ label }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- MAJOR INSIGHTS -->
+<section class="py-16 px-6">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-12" data-aos="fade-up">
+      <p class="section-label">Core Findings</p>
+      <h2 class="section-title mb-4">Major Insights</h2>
+    </div>
+
+    <div class="space-y-5">
+      {% set insights = [
+        {
+          'num': '01',
+          'category': 'Age & Demographics',
+          'icon': 'fas fa-birthday-cake',
+          'color': '#E63946',
+          'title': 'Heart disease risk increases significantly after age 50',
+          'body': 'Our analysis reveals a dramatic escalation in heart disease risk starting at age 50, with each subsequent decade roughly doubling the probability. Patients aged 60-74 account for the highest proportion of heart disease cases in our dataset, representing over 35% of all positive diagnoses.',
+          'metric': '2x risk per decade after 50'
+        },
+        {
+          'num': '02',
+          'category': 'Smoking',
+          'icon': 'fas fa-smoking',
+          'color': '#F97316',
+          'title': 'Smoking strongly correlates with heart disease prevalence',
+          'body': 'Current and former smokers show a 40% higher prevalence of heart disease compared to non-smokers in our study population. The effect is dose-dependent — heavier, longer-term smokers exhibit progressively worse outcomes. Notably, even former smokers continue to show elevated risk for years after quitting.',
+          'metric': '40% higher risk in smokers'
+        },
+        {
+          'num': '03',
+          'category': 'Diabetes & Stroke',
+          'icon': 'fas fa-procedures',
+          'color': '#EF4444',
+          'title': 'Patients with diabetes and stroke history show highest heart disease risk',
+          'body': 'The co-occurrence of diabetes and stroke history creates a compounding risk profile. Diabetic patients with a prior stroke show nearly 4x the heart disease rate of the general population. This triple comorbidity pattern represents the single highest-risk profile in our dataset.',
+          'metric': '4x risk with triple comorbidity'
+        },
+        {
+          'num': '04',
+          'category': 'Physical Activity',
+          'icon': 'fas fa-running',
+          'color': '#10B981',
+          'title': 'Regular physical activity acts as a powerful protective factor',
+          'body': 'Physically active individuals demonstrate a 30% lower rate of heart disease across all age groups. The protective effect of physical activity is consistent across genders, racial groups, and BMI categories — suggesting exercise may partially offset other risk factors.',
+          'metric': '30% risk reduction with activity'
+        },
+        {
+          'num': '05',
+          'category': 'BMI & Obesity',
+          'icon': 'fas fa-weight',
+          'color': '#F59E0B',
+          'title': 'Obesity (BMI > 30) significantly elevates cardiovascular risk',
+          'body': 'Obese patients (BMI ≥ 30) show nearly double the heart disease rate of normal-weight individuals. The relationship is non-linear — morbidly obese patients (BMI > 40) face 2.8x the risk. Even moderate overweight (BMI 25-30) increases risk by approximately 25%.',
+          'metric': '2x risk at BMI >30'
+        },
+        {
+          'num': '06',
+          'category': 'Gender',
+          'icon': 'fas fa-venus-mars',
+          'color': '#6366F1',
+          'title': 'Men show significantly higher heart disease rates across all age groups',
+          'body': 'Male patients in our dataset have approximately 2x the heart disease prevalence of female patients. However, this gap narrows substantially after age 65, consistent with post-menopausal hormonal changes in women. The female advantage in cardiovascular protection appears to be primarily hormone-dependent.',
+          'metric': '2x higher prevalence in men'
+        },
+        {
+          'num': '07',
+          'category': 'General Health',
+          'icon': 'fas fa-heartbeat',
+          'color': '#EC4899',
+          'title': 'Self-reported poor health is a strong predictor of heart disease',
+          'body': 'Patients who self-report "Poor" general health are 4x more likely to have heart disease than those reporting "Excellent" health. This validates subjective health perception as a clinically meaningful predictor, suggesting simple health surveys can serve as effective screening tools.',
+          'metric': '4x risk with poor self-health'
+        },
+        {
+          'num': '08',
+          'category': 'Race & Ethnicity',
+          'icon': 'fas fa-globe-americas',
+          'color': '#00F5D4',
+          'title': 'Significant racial disparities exist in heart disease prevalence',
+          'body': 'Our analysis confirms substantial racial disparities in heart disease outcomes. African American patients show the highest prevalence rates, followed by White non-Hispanic patients. These disparities reflect complex interactions between genetic predisposition, socioeconomic factors, healthcare access, and lifestyle determinants.',
+          'metric': 'Up to 40% disparity across groups'
+        },
+      ] %}
+
+      {% for ins in insights %}
+      <div class="insight-card" data-aos="fade-up" data-aos-delay="{{ loop.index0 * 60 }}">
+        <div class="flex items-start gap-5">
+          <div class="shrink-0">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background:{{ ins.color }}15;border:1px solid {{ ins.color }}30;">
+              <i class="{{ ins.icon }}" style="color:{{ ins.color }};font-size:1.3rem;"></i>
+            </div>
+          </div>
+          <div class="flex-1">
+            <div class="flex flex-wrap items-center gap-3 mb-2">
+              <span class="text-xs font-bold text-gray-600">{{ ins.num }}</span>
+              <span class="text-xs px-3 py-0.5 rounded-full font-semibold" style="background:{{ ins.color }}15;color:{{ ins.color }};border:1px solid {{ ins.color }}30;">{{ ins.category }}</span>
+            </div>
+            <h3 class="text-lg font-bold mb-3 leading-tight">{{ ins.title }}</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-4 font-inter">{{ ins.body }}</p>
+            <div class="flex items-center gap-2">
+              <i class="fas fa-chart-bar text-xs" style="color:{{ ins.color }};"></i>
+              <span class="text-xs font-semibold" style="color:{{ ins.color }};">Key Metric: {{ ins.metric }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+</section>
+
+<!-- CONCLUSION -->
+<section class="py-16 px-6">
+  <div class="max-w-4xl mx-auto" data-aos="fade-up">
+    <div class="glass-card p-10 text-center relative overflow-hidden">
+      <div class="absolute inset-0 opacity-5" style="background:radial-gradient(ellipse at center, #E63946 0%, transparent 70%);"></div>
+      <i class="fas fa-heart text-5xl text-med-red mb-6 block glow-red"></i>
+      <h2 class="text-3xl font-black mb-4">Key Takeaway</h2>
+      <p class="text-gray-400 leading-relaxed text-lg font-inter mb-8 max-w-2xl mx-auto">
+        Heart disease is a preventable condition for a significant portion of the population. The data shows that <strong class="text-cyan-accent">modifiable risk factors</strong> — smoking, physical inactivity, obesity, and excessive alcohol — account for a substantial share of heart disease cases. Targeted interventions addressing these factors can meaningfully reduce cardiovascular disease burden.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="/worksheets" class="btn-primary">Explore Visualizations</a>
+        <a href="/riskfactors" class="btn-outline">View Risk Factors</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

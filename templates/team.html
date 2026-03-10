@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+{% block title %}Team | Heart Disease Risk Factor Analysis{% endblock %}
+
+{% block content %}
+<!-- PAGE HERO -->
+<section class="page-hero grid-bg">
+  <div class="max-w-4xl mx-auto px-6">
+    <div class="badge mb-6 inline-flex"><i class="fas fa-users text-xs"></i> Our Team</div>
+    <h1 class="section-title mb-4">Meet the Team</h1>
+    <p class="section-subtitle">The passionate data analysts and developers behind this heart disease risk factor analysis project.</p>
+  </div>
+</section>
+
+<!-- TEAM GRID -->
+<section class="py-20 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+      {% set members = [
+        {
+          'name': 'Abhimanyu Singh',
+          'role': 'Data Analyst & Project Lead',
+          'initials': 'AS',
+          'gradient': 'linear-gradient(135deg, #E63946, #c62836)',
+          'skills': ['Tableau', 'Python', 'Statistics'],
+          'bio': 'Led the overall project design and Tableau dashboard development. Specialized in healthcare data analytics.',
+          'linkedin': 'https://www.linkedin.com/in/abhimanyu-singh-62b824328/',
+          'github': 'https://github.com/abhimanyu-0815',
+          'color': '#E63946'
+        },
+        {
+          'name': 'Abhinav Sinha',
+          'role': 'Data Visualization Engineer',
+          'initials': 'AS',
+          'gradient': 'linear-gradient(135deg, #00F5D4, #00c4aa)',
+          'skills': ['Tableau', 'D3.js', 'UX Design'],
+          'bio': 'Designed all interactive worksheets and dashboards, ensuring clarity and visual impact of data presentations.',
+          'linkedin': 'https://www.linkedin.com/in/abhinav-sinha2708/',
+          'github': 'https://github.com/AbhinavSn-3006',
+          'color': '#00F5D4'
+        },
+        {
+          'name': 'Akarsh Pratap Singh',
+          'role': 'Backend Developer',
+          'initials': 'AP',
+          'gradient': 'linear-gradient(135deg, #6366F1, #4F46E5)',
+          'skills': ['Python', 'Flask', 'SQL'],
+          'bio': 'Built the Flask web application, API integrations, and backend infrastructure for data processing.',
+          'linkedin': 'https://www.linkedin.com/in/akarsh-pratap-singh-61052931a/',
+          'github': 'https://github.com/Akarsh28-collab',
+          'color': '#6366F1'
+        },
+        {
+          'name': 'Abhinav Singh',
+          'role': 'Data Scientist',
+          'initials': 'AS',
+          'gradient': 'linear-gradient(135deg, #F59E0B, #D97706)',
+          'skills': ['Python', 'Pandas', 'ML'],
+          'bio': 'Conducted statistical analysis, data cleaning, and exploratory data analysis on the CDC BRFSS dataset.',
+          'linkedin': 'https://www.linkedin.com/in/itsabhinavdevs/',
+          'github': 'https://github.com/itsabhinavdevs',
+          'color': '#F59E0B'
+        },
+        {
+          'name': 'Abhimanyu Singh',
+          'role': 'Frontend Developer',
+          'initials': 'AS',
+          'gradient': 'linear-gradient(135deg, #10B981, #059669)',
+          'skills': ['HTML/CSS', 'JavaScript', 'GSAP'],
+          'bio': 'Crafted the user interface with smooth animations, responsive design, and interactive elements.',
+          'linkedin': 'https://www.linkedin.com/in/abhimanyu-singh-62b824328/',
+          'github': 'https://github.com/abhimanyu-0815',
+          'color': '#10B981'
+        },
+        {
+          'name': 'Abhinav Sinha',
+          'role': 'Healthcare Domain Expert',
+          'initials': 'AS',
+          'gradient': 'linear-gradient(135deg, #EC4899, #DB2777)',
+          'skills': ['Medical Research', 'Epidemiology', 'Statistics'],
+          'bio': 'Provided clinical expertise and medical knowledge to ensure accurate interpretation of heart disease data.',
+          'linkedin': 'https://www.linkedin.com/in/abhinav-sinha2708/',
+          'github': 'https://github.com/AbhinavSn-3006',
+          'color': '#EC4899'
+        },
+        {
+          'name': 'Abhinav Singh',
+          'role': 'Data Engineer',
+          'initials': 'AS',
+          'gradient': 'linear-gradient(135deg, #8B5CF6, #7C3AED)',
+          'skills': ['ETL', 'Python', 'Data Pipelines'],
+          'bio': 'Managed data pipelines, preprocessing workflows, and ensured data quality throughout the project.',
+          'linkedin': 'https://www.linkedin.com/in/itsabhinavdevs/',
+          'github': 'https://github.com/itsabhinavdevs',
+          'color': '#8B5CF6'
+        },
+        {
+          'name': 'Akarsh Pratap Singh',
+          'role': 'UX/UI Designer',
+          'initials': 'AP',
+          'gradient': 'linear-gradient(135deg, #F97316, #EA580C)',
+          'skills': ['Figma', 'UI Design', 'Prototyping'],
+          'bio': 'Designed the visual language, color system, and user experience flow for this analytics platform.',
+          'linkedin': 'https://www.linkedin.com/in/akarsh-pratap-singh-61052931a/',
+          'github': 'https://github.com/Akarsh28-collab',
+          'color': '#F97316'
+        },
+      ] %}
+
+      {% for m in members %}
+      <div class="team-card text-center p-6" data-aos="fade-up" data-aos-delay="{{ loop.index0 * 80 }}">
+        <!-- Avatar -->
+        <div class="team-avatar" style="background:{{ m.gradient }};">
+          {{ m.initials }}
+        </div>
+        <!-- Name & Role -->
+        <h3 class="font-bold text-base mb-1">{{ m.name }}</h3>
+        <p class="text-xs font-medium mb-3" style="color:{{ m.color }};">{{ m.role }}</p>
+        <!-- Bio -->
+        <p class="text-gray-500 text-xs leading-relaxed mb-4 font-inter">{{ m.bio }}</p>
+        <!-- Skills -->
+        <div class="flex flex-wrap justify-center gap-1.5 mb-5">
+          {% for skill in m.skills %}
+          <span class="text-xs px-2.5 py-1 rounded-full" style="background:{{ m.color }}12;color:{{ m.color }};border:1px solid {{ m.color }}25;">{{ skill }}</span>
+          {% endfor %}
+        </div>
+        <!-- Social Links -->
+        <div class="flex justify-center gap-3 pt-4 border-t border-white/5">
+          <a href="{{ m.linkedin }}" class="w-9 h-9 rounded-xl flex items-center justify-center border border-white/10 text-gray-500 hover:text-cyan-accent hover:border-cyan-accent/50 transition-all text-sm">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="{{ m.github }}" class="w-9 h-9 rounded-xl flex items-center justify-center border border-white/10 text-gray-500 hover:text-cyan-accent hover:border-cyan-accent/50 transition-all text-sm">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="mailto:team@heartanalytics.com" class="w-9 h-9 rounded-xl flex items-center justify-center border border-white/10 text-gray-500 hover:text-med-red hover:border-med-red/50 transition-all text-sm">
+            <i class="fas fa-envelope"></i>
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+</section>
+
+<!-- COLLABORATION SECTION -->
+<section class="py-16 px-6 bg-secondary-bg/30">
+  <div class="max-w-4xl mx-auto text-center" data-aos="fade-up">
+    <p class="section-label">Collaboration</p>
+    <h2 class="section-title mb-4">Built Together</h2>
+    <p class="section-subtitle mb-8 max-w-2xl mx-auto">This project was a collaborative effort combining expertise in data science, healthcare analytics, software engineering, and visual design to create a meaningful public health resource.</p>
+    <div class="glass-card p-8">
+      <div class="grid grid-cols-3 md:grid-cols-6 gap-4 text-center mb-8">
+        {% for icon, label in [
+          ('fas fa-brain','Analysis'),
+          ('fas fa-chart-bar','Visualization'),
+          ('fas fa-code','Development'),
+          ('fas fa-palette','Design'),
+          ('fas fa-database','Data'),
+          ('fas fa-stethoscope','Medicine'),
+        ] %}
+        <div>
+          <i class="{{ icon }} text-2xl text-cyan-accent mb-2 block"></i>
+          <span class="text-xs text-gray-500">{{ label }}</span>
+        </div>
+        {% endfor %}
+      </div>
+      <a href="/contact" class="btn-primary inline-flex items-center gap-2">
+        <i class="fas fa-envelope"></i> Get In Touch
+      </a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

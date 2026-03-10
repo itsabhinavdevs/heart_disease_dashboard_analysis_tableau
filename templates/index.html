@@ -1,0 +1,190 @@
+{% extends "base.html" %}
+{% block title %}Heart Disease Risk Factor Analysis{% endblock %}
+
+{% block content %}
+<!-- Scroll Progress Bar -->
+<div id="scroll-progress" class="fixed top-0 left-0 h-0.5 bg-gradient-to-r from-med-red to-cyan-accent z-50 transition-all duration-100" style="width:0%"></div>
+
+<!-- ===== HERO SECTION ===== -->
+<section class="hero-section grid-bg min-h-screen flex items-center">
+  <!-- Floating pulse rings behind heart -->
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+    <div class="pulse-ring"></div>
+    <div class="pulse-ring"></div>
+    <div class="pulse-ring"></div>
+  </div>
+
+  <!-- Floating Medical Icons -->
+  <div class="floating-icon" style="top:15%;left:8%;font-size:80px;animation-delay:0s;"><i class="fas fa-heartbeat text-red-500"></i></div>
+  <div class="floating-icon" style="top:25%;right:10%;font-size:60px;animation-delay:2s;"><i class="fas fa-stethoscope text-cyan-400"></i></div>
+  <div class="floating-icon" style="bottom:20%;left:15%;font-size:70px;animation-delay:1s;"><i class="fas fa-pills text-red-400"></i></div>
+  <div class="floating-icon" style="bottom:30%;right:8%;font-size:55px;animation-delay:3s;"><i class="fas fa-dna text-cyan-500"></i></div>
+  <div class="floating-icon" style="top:60%;left:5%;font-size:50px;animation-delay:1.5s;"><i class="fas fa-lungs text-red-300"></i></div>
+
+  <div class="max-w-7xl mx-auto px-6 text-center relative z-10 pt-24">
+    <!-- Badge -->
+    <div class="inline-flex items-center gap-2 mb-8" data-aos="fade-down">
+      <span class="badge">
+        <i class="fas fa-chart-line text-xs"></i>
+        Advanced Analytics Platform
+      </span>
+    </div>
+
+    <!-- Title -->
+    <h1 class="hero-title text-5xl md:text-7xl font-black mb-6 leading-tight opacity-0">
+      <span style="display:block;background:linear-gradient(135deg,#EAEAEA,#EAEAEA 50%,#E63946);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Heart Disease</span>
+      <span style="display:block;background:linear-gradient(135deg,#00F5D4,#E63946);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Risk Factor Analysis</span>
+    </h1>
+
+    <!-- Subtitle -->
+    <p class="hero-subtitle max-w-2xl mx-auto text-gray-400 text-xl mb-4 leading-relaxed opacity-0 font-inter">
+      Interactive analytics platform exploring heart disease patterns through advanced Tableau visualizations and data-driven insights.
+    </p>
+
+    <!-- ECG Line -->
+    <div class="flex justify-center mb-10 opacity-0 hero-subtitle">
+      <canvas id="ecg-canvas" width="500" height="60" class="opacity-70"></canvas>
+    </div>
+
+    <!-- CTA Buttons -->
+    <div class="hero-buttons flex flex-wrap justify-center gap-4 mb-16 opacity-0">
+      <a href="/worksheets" class="btn-primary flex items-center gap-2">
+        <i class="fas fa-chart-bar"></i> Explore Worksheets
+      </a>
+      <a href="/dashboards" class="btn-outline flex items-center gap-2">
+        <i class="fas fa-th-large"></i> View Dashboard
+      </a>
+      <a href="/story" class="btn-outline flex items-center gap-2" style="border-color:#E63946;color:#E63946;">
+        <i class="fas fa-book-open"></i> View Data Story
+      </a>
+    </div>
+
+    <!-- Stats Row -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+      {% for stat in [
+        ('319K+','Patients', 'fas fa-users'),
+        ('20+','Risk Factors', 'fas fa-exclamation-triangle'),
+        ('10','Worksheets', 'fas fa-chart-pie'),
+        ('3','Dashboards', 'fas fa-th-large'),
+      ] %}
+      <div class="glass-card p-5 text-center">
+        <i class="{{ stat[2] }} text-cyan-accent text-lg mb-2 block"></i>
+        <div class="text-3xl font-black text-white mb-1">{{ stat[0] }}</div>
+        <div class="text-xs text-gray-500 uppercase tracking-widest">{{ stat[1] }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Scroll Indicator -->
+  <div class="scroll-indicator">
+    <span class="text-xs text-gray-600 tracking-widest uppercase">Scroll</span>
+    <i class="fas fa-chevron-down text-cyan-accent opacity-60"></i>
+  </div>
+</section>
+
+<!-- ===== QUICK OVERVIEW SECTION ===== -->
+<section class="py-24 px-6 relative">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16" data-aos="fade-up">
+      <p class="section-label">What We Analyze</p>
+      <h2 class="section-title mb-4">Comprehensive Heart Health Insights</h2>
+      <p class="section-subtitle max-w-2xl mx-auto">Exploring key risk factors, demographic patterns, and lifestyle correlations with heart disease through interactive data visualizations.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {% set cards = [
+        ('fas fa-chart-bar','Worksheets','10 individual visualizations exploring gender, age, lifestyle, and health conditions.','/worksheets','Explore Worksheets','#00F5D4'),
+        ('fas fa-th-large','Dashboards','3 comprehensive dashboards providing holistic analysis of heart disease risk factors.','/dashboards','View Dashboards','#E63946'),
+        ('fas fa-book-open','Data Story','A narrative journey through demographic analysis, risk factors, and health conditions.','/story','View Story','#00F5D4'),
+      ] %}
+      {% for icon, title, desc, href, cta, color in cards %}
+      <div class="glass-card p-8" data-aos="fade-up" data-aos-delay="{{ loop.index0 * 150 }}">
+        <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-6" style="background:rgba(0,245,212,0.1);border:1px solid rgba(0,245,212,0.2);">
+          <i class="{{ icon }}" style="color:{{ color }};font-size:1.5rem;"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-3">{{ title }}</h3>
+        <p class="text-gray-400 text-sm leading-relaxed mb-6 font-inter">{{ desc }}</p>
+        <a href="{{ href }}" class="text-sm font-semibold flex items-center gap-2 group" style="color:{{ color }};">
+          {{ cta }} <i class="fas fa-arrow-right transition-transform group-hover:translate-x-1"></i>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ===== KEY STATISTICS ===== -->
+<section class="py-20 px-6 bg-secondary-bg/50">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-12" data-aos="fade-up">
+      <p class="section-label">Key Findings</p>
+      <h2 class="section-title mb-4">Data at a Glance</h2>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      {% for num, suffix, label, icon in [
+        ('47','%','Heart Disease in Men','fas fa-male'),
+        ('35','%','Smokers Affected','fas fa-smoking'),
+        ('62','%','Post-50 Age Risk','fas fa-user-clock'),
+        ('2.8','x','Diabetes Multiplier','fas fa-syringe'),
+      ] %}
+      <div data-aos="zoom-in" data-aos-delay="{{ loop.index0 * 100 }}">
+        <div class="text-5xl font-black mb-2">
+          <span class="counter-num" data-count="{{ num }}" data-suffix="{{ suffix }}">{{ num }}{{ suffix }}</span>
+        </div>
+        <i class="{{ icon }} text-cyan-accent mb-2 block"></i>
+        <p class="text-gray-400 text-sm uppercase tracking-widest">{{ label }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURED RISK FACTORS ===== -->
+<section class="py-24 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex flex-col md:flex-row items-center justify-between mb-12 gap-4" data-aos="fade-up">
+      <div>
+        <p class="section-label">Risk Factors</p>
+        <h2 class="section-title">Primary Risk Indicators</h2>
+      </div>
+      <a href="/riskfactors" class="btn-outline text-sm whitespace-nowrap">View All Factors <i class="fas fa-arrow-right ml-2"></i></a>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      {% for icon, label, desc in [
+        ('fas fa-birthday-cake','Age','Risk doubles after 50'),
+        ('fas fa-smoking','Smoking','40% higher risk'),
+        ('fas fa-wine-glass','Alcohol','Moderate correlation'),
+        ('fas fa-syringe','Diabetes','2.8x increased risk'),
+        ('fas fa-running','Inactivity','30% risk increase'),
+        ('fas fa-weight','BMI','Obesity linked'),
+        ('fas fa-brain','Stroke','High comorbidity'),
+        ('fas fa-apple-alt','Diet','Protective factor'),
+      ] %}
+      <div class="risk-card" data-aos="fade-up" data-aos-delay="{{ loop.index0 * 80 }}">
+        <i class="{{ icon }} text-cyan-accent text-2xl mb-3 block"></i>
+        <h4 class="font-bold mb-1">{{ label }}</h4>
+        <p class="text-gray-500 text-xs">{{ desc }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA SECTION ===== -->
+<section class="py-20 px-6">
+  <div class="max-w-4xl mx-auto text-center" data-aos="fade-up">
+    <div class="glass-card p-16 relative overflow-hidden">
+      <div class="absolute inset-0 opacity-10" style="background:radial-gradient(ellipse at center, #E63946 0%, transparent 70%);"></div>
+      <i class="fas fa-heartbeat text-6xl text-med-red mb-6 block glow-red"></i>
+      <h2 class="text-4xl font-black mb-4">Explore the Full Analysis</h2>
+      <p class="text-gray-400 mb-8 text-lg font-inter">Dive deep into interactive visualizations that reveal the hidden patterns behind heart disease risk factors.</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="/dashboards" class="btn-primary">Explore Dashboards</a>
+        <a href="/insights" class="btn-outline">View Key Insights</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+{% block title %}About Project | Heart Disease Risk Factor Analysis{% endblock %}
+
+{% block content %}
+<!-- PAGE HERO -->
+<section class="page-hero grid-bg">
+  <div class="max-w-4xl mx-auto px-6">
+    <div class="badge mb-6 inline-flex"><i class="fas fa-info-circle text-xs"></i> About The Project</div>
+    <h1 class="section-title mb-4">Understanding the Project</h1>
+    <p class="section-subtitle">An in-depth exploration of heart disease risk factors using real-world healthcare data and interactive Tableau visualizations.</p>
+  </div>
+</section>
+
+<!-- PROBLEM STATEMENT -->
+<section class="py-20 px-6">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <div data-aos="fade-right">
+      <p class="section-label">The Problem</p>
+      <h2 class="text-3xl font-bold mb-6">Why Heart Disease Analysis Matters</h2>
+      <p class="text-gray-400 leading-relaxed mb-6 font-inter">Heart disease remains the leading cause of death globally, accounting for over 17.9 million deaths per year. Understanding the risk factors that contribute to heart disease is critical for prevention, early diagnosis, and effective treatment strategies.</p>
+      <p class="text-gray-400 leading-relaxed mb-8 font-inter">This project leverages a comprehensive dataset of over 319,000 patients to identify demographic, lifestyle, and health-related risk factors — providing actionable insights through interactive data visualizations.</p>
+      <div class="grid grid-cols-2 gap-4">
+        {% for num, label in [('17.9M','Annual Deaths'),('319K+','Patients Analyzed'),('20+','Risk Factors'),('10','Visualizations')] %}
+        <div class="glass-card p-5">
+          <div class="text-2xl font-black text-med-red mb-1">{{ num }}</div>
+          <div class="text-xs text-gray-500 uppercase tracking-widest">{{ label }}</div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div data-aos="fade-left">
+      <div class="relative">
+        <div class="glass-card p-8">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+            <span class="text-xs text-gray-500 ml-2 font-mono">dataset_overview.json</span>
+          </div>
+          <pre class="text-xs font-mono text-cyan-accent leading-relaxed overflow-x-auto">
+{
+  "dataset": "Heart Disease Health Indicators",
+  "source": "CDC BRFSS Survey",
+  "records": 319795,
+  "features": 22,
+  "target": "HeartDiseaseorAttack",
+  "class_distribution": {
+    "no_heart_disease": "91.4%",
+    "heart_disease": "8.6%"
+  },
+  "key_features": [
+    "Age", "Sex", "BMI", "Smoking",
+    "AlcoholDrinking", "Stroke",
+    "PhysicalActivity", "Diabetes",
+    "GenHealth", "MentalHealth"
+  ]
+}
+          </pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gradient-divider mx-6"></div>
+
+<!-- DATASET OVERVIEW -->
+<section class="py-16 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-12" data-aos="fade-up">
+      <p class="section-label">Data Foundation</p>
+      <h2 class="section-title mb-4">Dataset Overview</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {% for icon, title, desc in [
+        ('fas fa-database','Source Dataset','CDC Behavioral Risk Factor Surveillance System (BRFSS) with 319,795 survey responses collected across all US states.'),
+        ('fas fa-columns','22 Features','Includes demographic data (age, sex, race), lifestyle factors (smoking, alcohol, physical activity), and medical history (diabetes, stroke, BMI).'),
+        ('fas fa-bullseye','Binary Target','The target variable HeartDiseaseorAttack indicates whether a respondent has ever been diagnosed with coronary heart disease or a heart attack.'),
+      ] %}
+      <div class="glass-card p-8" data-aos="fade-up" data-aos-delay="{{ loop.index0 * 150 }}">
+        <i class="{{ icon }} text-cyan-accent text-3xl mb-4 block"></i>
+        <h3 class="text-lg font-bold mb-3">{{ title }}</h3>
+        <p class="text-gray-400 text-sm leading-relaxed font-inter">{{ desc }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- TECHNOLOGIES USED -->
+<section class="py-16 px-6 bg-secondary-bg/40">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-12" data-aos="fade-up">
+      <p class="section-label">Tech Stack</p>
+      <h2 class="section-title mb-4">Technologies Used</h2>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+      {% for icon, name, desc, color in [
+        ('fas fa-chart-bar','Tableau','Data Visualization','#00F5D4'),
+        ('fab fa-python','Python','Data Processing','#3B82F6'),
+        ('fas fa-flask','Flask','Web Framework','#10B981'),
+        ('fas fa-code','HTML/CSS/JS','Frontend','#F59E0B'),
+        ('fas fa-database','Pandas','Data Analysis','#8B5CF6'),
+      ] %}
+      <div class="cyan-glow-card p-6 text-center" data-aos="zoom-in" data-aos-delay="{{ loop.index0 * 100 }}">
+        <i class="{{ icon }} text-3xl mb-3 block" style="color:{{ color }};"></i>
+        <h4 class="font-bold mb-1">{{ name }}</h4>
+        <p class="text-gray-500 text-xs">{{ desc }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- PROJECT WORKFLOW -->
+<section class="py-16 px-6">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-12" data-aos="fade-up">
+      <p class="section-label">Methodology</p>
+      <h2 class="section-title mb-4">Project Workflow</h2>
+    </div>
+    <div class="space-y-4">
+      {% for step, title, desc in [
+        ('01','Data Collection','Obtained CDC BRFSS dataset with 319,795 survey responses covering heart disease indicators across all demographic groups.'),
+        ('02','Data Preprocessing','Cleaned and processed the dataset using Python and Pandas — handling missing values, encoding categoricals, and normalizing numerical features.'),
+        ('03','Exploratory Data Analysis','Conducted EDA to identify distributions, correlations, and statistical patterns among risk factors and heart disease outcomes.'),
+        ('04','Tableau Visualization','Built 10 interactive worksheets, 3 comprehensive dashboards, and a narrative data story using Tableau Public.'),
+        ('05','Web Integration','Deployed the interactive analytics platform using Python Flask with embedded Tableau visualizations for seamless user experience.'),
+      ] %}
+      <div class="flex gap-6 items-start glass-card p-6" data-aos="fade-up" data-aos-delay="{{ loop.index0 * 100 }}">
+        <span class="text-5xl font-black text-cyan-accent/20 font-poppins shrink-0 leading-none">{{ step }}</span>
+        <div>
+          <h3 class="text-lg font-bold mb-2 text-cyan-accent">{{ title }}</h3>
+          <p class="text-gray-400 text-sm leading-relaxed font-inter">{{ desc }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}

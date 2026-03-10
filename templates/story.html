@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+{% block title %}Story Presentation | Heart Disease Risk Factor Analysis{% endblock %}
+
+{% block content %}
+<!-- PAGE HERO -->
+<section class="page-hero grid-bg">
+  <div class="max-w-4xl mx-auto px-6">
+    <div class="badge mb-6 inline-flex"><i class="fas fa-book-open text-xs"></i> Data Story</div>
+    <h1 class="section-title mb-4">The Heart Disease Story</h1>
+    <p class="section-subtitle">A narrative journey through our data analysis — from demographic patterns to high-risk comorbidity profiles.</p>
+  </div>
+</section>
+
+<!-- STORY LAYOUT -->
+<section class="py-16 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+
+      <!-- LEFT: Scene Navigation -->
+      <div class="lg:col-span-2">
+        <div class="sticky top-24 space-y-4">
+          <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-6">Story Chapters</h3>
+
+          {% set scenes = [
+            {
+              'num': '01',
+              'title': 'Demographic Analysis',
+              'icon': 'fas fa-users',
+              'color': '#00F5D4',
+              'desc': 'Explore how age, gender, and race shape heart disease prevalence across the US population.',
+              'details': ['Age distribution and risk escalation','Gender-wise prevalence comparison','Racial & ethnic health disparities','Population density of high-risk groups'],
+              'iframe': 'https://public.tableau.com/views/heart_disease_dashboards_17731394056670/Story?:embed=y&:showVizHome=no'
+            },
+            {
+              'num': '02',
+              'title': 'Lifestyle Risk Factors',
+              'icon': 'fas fa-running',
+              'color': '#F97316',
+              'desc': 'How daily lifestyle choices — from smoking to physical activity — dramatically influence cardiovascular health.',
+              'details': ['Smoking impact on heart disease','Alcohol consumption patterns','Physical activity as a protective factor','Combined lifestyle risk scoring'],
+              'iframe': 'https://public.tableau.com/views/heart_disease_dashboards_17731394056670/Story?:embed=y&:showVizHome=no'
+            },
+            {
+              'num': '03',
+              'title': 'Health Conditions Analysis',
+              'icon': 'fas fa-stethoscope',
+              'color': '#E63946',
+              'desc': 'Examining how underlying health conditions like diabetes and stroke exponentially increase heart disease risk.',
+              'details': ['Diabetes as a major risk multiplier','Stroke history and cardiac outcomes','General health self-assessment validity','Mental health correlations'],
+              'iframe': 'https://public.tableau.com/views/heart_disease_dashboards_17731394056670/Story?:embed=y&:showVizHome=no'
+            },
+            {
+              'num': '04',
+              'title': 'BMI & Stroke Risk',
+              'icon': 'fas fa-weight',
+              'color': '#8B5CF6',
+              'desc': 'Investigating the critical relationship between body weight, obesity categories, and cardiovascular stroke risk.',
+              'details': ['BMI category risk stratification','Obesity and heart disease link','Stroke-BMI interaction analysis','High-risk patient profile identification'],
+              'iframe': 'https://public.tableau.com/views/heart_disease_dashboards_17731394056670/Story?:embed=y&:showVizHome=no'
+            },
+          ] %}
+
+          {% for scene in scenes %}
+          <div class="story-scene {% if loop.first %}active{% endif %}"
+               data-iframe="{{ scene.iframe }}"
+               data-aos="fade-right"
+               data-aos-delay="{{ loop.index0 * 100 }}">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style="background:{{ scene.color }}15;border:1px solid {{ scene.color }}30;">
+                <i class="{{ scene.icon }} text-sm" style="color:{{ scene.color }};"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="text-xs font-bold text-gray-600">Scene {{ scene.num }}</span>
+                </div>
+                <h4 class="font-bold text-sm mb-2" style="color:{{ scene.color }};">{{ scene.title }}</h4>
+                <p class="text-gray-500 text-xs leading-relaxed mb-3">{{ scene.desc }}</p>
+                <ul class="space-y-1">
+                  {% for d in scene.details %}
+                  <li class="text-xs text-gray-600 flex items-center gap-2">
+                    <span class="w-1 h-1 rounded-full shrink-0" style="background:{{ scene.color }};"></span>{{ d }}
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+
+          <!-- Story controls -->
+          <div class="pt-4 flex gap-3">
+            <button id="prev-scene" class="flex-1 py-2 rounded-xl border border-white/10 text-gray-400 hover:border-cyan-accent/50 hover:text-cyan-accent transition-all text-sm">
+              <i class="fas fa-chevron-left mr-2"></i>Previous
+            </button>
+            <button id="next-scene" class="flex-1 py-2 rounded-xl border border-cyan-accent/30 text-cyan-accent hover:bg-cyan-accent/10 transition-all text-sm">
+              Next<i class="fas fa-chevron-right ml-2"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Tableau Story Embed -->
+      <div class="lg:col-span-3" data-aos="fade-left">
+        <div class="sticky top-24">
+          <div class="tableau-container">
+            <iframe id="story-iframe"
+              src="{{ scenes[0].iframe }}"
+              width="100%"
+              height="750"
+              style="border:none; min-height:750px;">
+            </iframe>
+          </div>
+          <p class="text-xs text-gray-600 mt-3 text-center font-inter">
+            <i class="fas fa-info-circle mr-1"></i>
+            Replace iframe src with your Tableau Public Story URL. Use the scene navigation on the left to switch views.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FULL STORY EMBED -->
+<section class="py-16 px-6 bg-secondary-bg/30">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-10" data-aos="fade-up">
+      <p class="section-label">Complete Narrative</p>
+      <h2 class="section-title mb-4">Full Tableau Story</h2>
+      <p class="section-subtitle max-w-2xl mx-auto">Experience the complete data narrative with all story points in a single immersive presentation.</p>
+    </div>
+    <div class="tableau-container" data-aos="fade-up" data-aos-delay="200">
+      <div class="bg-secondary-bg p-4 border-b border-white/10 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="flex gap-1.5">
+            <div class="w-3 h-3 rounded-full bg-red-500/60"></div>
+            <div class="w-3 h-3 rounded-full bg-yellow-500/60"></div>
+            <div class="w-3 h-3 rounded-full bg-green-500/60"></div>
+          </div>
+          <span class="text-xs text-gray-500 font-mono">Heart Disease Risk Factor Story — Tableau Public</span>
+        </div>
+        <a href="https://public.tableau.com/views/heart_disease_dashboards_17731394056670/Story?:embed=y&:showVizHome=no" target="_blank"
+           class="text-xs text-cyan-accent hover:underline flex items-center gap-1">
+          Open in Tableau <i class="fas fa-external-link-alt text-xs"></i>
+        </a>
+      </div>
+      <iframe
+        src="https://public.tableau.com/views/heart_disease_dashboards_17731394056670/Story?:embed=y&:display_count=yes&:showVizHome=no"
+        width="100%"
+        height="900"
+        style="border:none;">
+      </iframe>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Story scene navigation with prev/next
+const scenes = document.querySelectorAll('.story-scene');
+let currentScene = 0;
+
+function activateScene(idx) {
+  scenes.forEach(s => s.classList.remove('active'));
+  scenes[idx].classList.add('active');
+  const src = scenes[idx].getAttribute('data-iframe');
+  const frame = document.getElementById('story-iframe');
+  if (frame && src) frame.src = src;
+  currentScene = idx;
+  document.getElementById('prev-scene').disabled = idx === 0;
+  document.getElementById('next-scene').disabled = idx === scenes.length - 1;
+}
+
+document.getElementById('prev-scene').addEventListener('click', () => {
+  if (currentScene > 0) activateScene(currentScene - 1);
+});
+document.getElementById('next-scene').addEventListener('click', () => {
+  if (currentScene < scenes.length - 1) activateScene(currentScene + 1);
+});
+
+scenes.forEach((scene, i) => {
+  scene.addEventListener('click', () => activateScene(i));
+});
+</script>
+{% endblock %}

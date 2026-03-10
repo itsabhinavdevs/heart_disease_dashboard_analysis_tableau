@@ -1,0 +1,209 @@
+{% extends "base.html" %}
+{% block title %}Worksheets | Heart Disease Risk Factor Analysis{% endblock %}
+
+{% block content %}
+<!-- MODAL -->
+<div id="viz-modal" class="modal-overlay">
+  <div class="modal-box">
+    <div class="flex items-start justify-between mb-6">
+      <div>
+        <h2 id="modal-title" class="text-2xl font-bold mb-1"></h2>
+        <p id="modal-desc" class="text-gray-400 text-sm font-inter"></p>
+      </div>
+      <button onclick="closeModal()" class="w-10 h-10 rounded-xl flex items-center justify-center border border-white/10 hover:border-red-500/50 hover:bg-red-500/10 transition-all text-gray-400 hover:text-red-400">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="tableau-container">
+      <iframe id="modal-iframe" src="" width="100%" height="700" style="border:none;"></iframe>
+    </div>
+    <p class="text-xs text-gray-600 mt-4 text-center font-inter">Replace iframe src with your actual Tableau Public worksheet URL</p>
+  </div>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero grid-bg">
+  <div class="max-w-4xl mx-auto px-6">
+    <div class="badge mb-6 inline-flex"><i class="fas fa-chart-bar text-xs"></i> Visualization Gallery</div>
+    <h1 class="section-title mb-4">Worksheet Visualizations</h1>
+    <p class="section-subtitle">10 individual Tableau worksheets exploring different dimensions of heart disease risk factors.</p>
+  </div>
+</section>
+
+<!-- FILTER BAR -->
+<section class="py-8 px-6 bg-secondary-bg/30 border-b border-white/5">
+  <div class="max-w-7xl mx-auto flex flex-wrap items-center gap-3">
+    <span class="text-xs text-gray-500 uppercase tracking-widest mr-2">Filter:</span>
+    {% for cat in ['All','Demographics','Lifestyle','Health Conditions'] %}
+    <button class="filter-btn text-xs px-4 py-2 rounded-full border transition-all
+      {% if cat == 'All' %}border-cyan-accent text-cyan-accent bg-cyan-accent/10{% else %}border-white/15 text-gray-400 hover:border-cyan-accent/50 hover:text-cyan-accent{% endif %}"
+      data-filter="{{ cat }}">{{ cat }}</button>
+    {% endfor %}
+    <span class="ml-auto text-xs text-gray-500">10 visualizations</span>
+  </div>
+</section>
+
+<!-- WORKSHEETS GRID -->
+<section class="py-16 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+      {% set worksheets = [
+        {
+          'title': 'Gender vs Heart Disease',
+          'category': 'Demographics',
+          'desc': 'Comparative analysis of heart disease prevalence across genders, revealing biological sex as a significant risk factor in cardiovascular health outcomes.',
+          'icon': 'fas fa-venus-mars',
+          'color': '#6366F1',
+          'insight': 'Men show 2x higher prevalence',
+          'iframe_src': 'https://public.tableau.com/views/heart_disease_dashboards_17731394056670/GendervsHeartDisease?:embed=y&:showVizHome=no'
+        },
+        {
+          'title': 'Age vs Heart Disease',
+          'category': 'Demographics',
+          'desc': 'Age-stratified analysis demonstrating how cardiovascular risk escalates with age, with particularly sharp increases after the age of 50.',
+          'icon': 'fas fa-chart-line',
+          'color': '#E63946',
+          'insight': 'Risk doubles after age 50',
+          'iframe_src': 'https://public.tableau.com/views/heart_disease_dashboards_17731394056670/AgeVsHeartDisease?:embed=y&:showVizHome=no'
+        },
+        {
+          'title': 'Diabetic vs Stroke',
+          'category': 'Health Conditions',
+          'desc': 'Cross-analysis of diabetes and stroke history in patients with heart disease, identifying high-risk comorbidity patterns.',
+          'icon': 'fas fa-procedures',
+          'color': '#EF4444',
+          'insight': 'Strong co-occurrence observed',
+          'iframe_src': 'https://public.tableau.com/views/heart_disease_dashboards_17731394056670/DiabeticVsStroke?:embed=y&:showVizHome=no'
+        },
+        {
+          'title': 'Impact of Smoking and Alcohol on Heart Disease',
+          'category': 'Lifestyle',
+          'desc': 'Detailed visualization of smoking\'s correlation with heart disease risk, comparing smokers vs non-smokers across demographic groups.',
+          'icon': 'fas fa-smoking',
+          'color': '#F97316',
+          'insight': '40% higher risk in smokers',
+          'iframe_src': 'https://public.tableau.com/views/heart_disease_dashboards_17731394056670/ImpactofSmokingandAlcoholonHeartDisease?:embed=y&:showVizHome=no'
+        },
+        {
+          'title': 'Stroke vs Other Diseases',
+          'category': 'Lifestyle',
+          'desc': 'Exploring the dose-response relationship between alcohol consumption and cardiovascular outcomes across different patient demographics.',
+          'icon': 'fas fa-wine-glass',
+          'color': '#8B5CF6',
+          'insight': 'Heavy drinkers show elevated risk',
+          'iframe_src': 'https://public.tableau.com/views/heart_disease_dashboards_17731394056670/StrokevsOtherDisease?:embed=y&:showVizHome=no'
+        },
+        {
+          'title': 'Physical Activity vs Heart Disease',
+          'category': 'Lifestyle',
+          'desc': 'Analysis of how regular physical activity serves as a protective factor against heart disease across different age groups and genders.',
+          'icon': 'fas fa-running',
+          'color': '#10B981',
+          'insight': '30% risk reduction with activity',
+          'iframe_src': 'https://public.tableau.com/views/heart_disease_dashboards_17731394056670/PhysicalActivityvsHeartDisease?:embed=y&:showVizHome=no'
+        },
+        {
+          'title': 'Racewise Heart Disease',
+          'category': 'Demographics',
+          'desc': 'Demographic breakdown of heart disease prevalence across racial and ethnic groups, highlighting health equity disparities in cardiovascular outcomes.',
+          'icon': 'fas fa-globe-americas',
+          'color': '#00F5D4',
+          'insight': 'Significant racial disparities found',
+          'iframe_src': 'https://public.tableau.com/views/heart_disease_dashboards_17731394056670/RacewiseHeartDisease?:embed=y&:showVizHome=no'
+        },
+        {
+          'title': 'General Health vs Heart Disease',
+          'category': 'Health Conditions',
+          'desc': 'Self-reported general health status as a predictor of heart disease, validating subjective health perception as a meaningful clinical indicator.',
+          'icon': 'fas fa-heartbeat',
+          'color': '#EC4899',
+          'insight': 'Poor health = 4x higher risk',
+          'iframe_src': 'https://public.tableau.com/views/heart_disease_dashboards_17731394056670/GeneralHealthvsHeartDisease?:embed=y&:showVizHome=no'
+        },
+        {
+          'title': 'Age BMI vs Diabetic',
+          'category': 'Health Conditions',
+          'desc': 'Multi-variable scatter analysis exploring the complex interactions between age, body mass index, and diabetes in determining heart disease risk.',
+          'icon': 'fas fa-weight',
+          'color': '#F59E0B',
+          'insight': 'BMI+Age compound risk',
+          'iframe_src': 'https://public.tableau.com/views/heart_disease_dashboards_17731394056670/AgevsBMIvsDiabetic?:embed=y&:showVizHome=no'
+        },
+        {
+          'title': 'Stroke Diabetes Heart Disease',
+          'category': 'Health Conditions',
+          'desc': 'Triple comorbidity analysis examining the intersection of stroke history, diabetes, and heart disease — identifying the highest-risk patient profiles.',
+          'icon': 'fas fa-brain',
+          'color': '#EF4444',
+          'insight': 'Triple risk profile identified',
+          'iframe_src': 'https://public.tableau.com/views/heart_disease_dashboards_17731394056670/PeopleGotStrokeSufferingfromDiabetesandHeartDisease?:embed=y&:showVizHome=no'
+        },
+      ] %}
+
+      {% for ws in worksheets %}
+      <div class="ws-card group" data-category="{{ ws.category }}" data-aos="fade-up" data-aos-delay="{{ loop.index0 * 80 }}">
+        <!-- Preview area -->
+        <div class="ws-card-preview relative">
+          <div class="absolute inset-0 flex items-center justify-center z-10">
+            <i class="{{ ws.icon }} text-6xl opacity-20" style="color:{{ ws.color }};"></i>
+          </div>
+          <!-- Mini chart lines decorative -->
+          <svg class="absolute inset-0 w-full h-full opacity-10" viewBox="0 0 400 180">
+            <polyline points="0,120 80,90 130,100 180,60 240,80 300,40 360,65 400,50" fill="none" stroke="{{ ws.color }}" stroke-width="2"/>
+            <polyline points="0,140 60,130 120,145 200,110 280,120 360,90 400,105" fill="none" stroke="{{ ws.color }}" stroke-width="1" opacity="0.5"/>
+          </svg>
+          <div class="absolute top-4 left-4 z-20">
+            <span class="text-xs px-3 py-1 rounded-full font-semibold" style="background:{{ ws.color }}20;color:{{ ws.color }};border:1px solid {{ ws.color }}40;">{{ ws.category }}</span>
+          </div>
+          <div class="absolute top-4 right-4 z-20">
+            <span class="text-xs text-gray-500">{{ loop.index }}/10</span>
+          </div>
+        </div>
+
+        <!-- Card content -->
+        <div class="p-6">
+          <div class="flex items-start justify-between mb-3">
+            <h3 class="text-lg font-bold group-hover:text-cyan-accent transition-colors">{{ ws.title }}</h3>
+          </div>
+          <p class="text-gray-400 text-sm leading-relaxed mb-4 font-inter">{{ ws.desc }}</p>
+          <div class="flex items-center justify-between">
+            <span class="flex items-center gap-2 text-xs font-semibold" style="color:{{ ws.color }};">
+              <i class="fas fa-lightbulb"></i> {{ ws.insight }}
+            </span>
+            <button onclick="openModal('{{ ws.title }}', '{{ ws.iframe_src }}', '{{ ws.desc[:80] }}...')"
+              class="btn-primary text-xs px-5 py-2.5 flex items-center gap-2">
+              <i class="fas fa-external-link-alt"></i> View Visualization
+            </button>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Filter functionality
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => {
+      b.className = b.className.replace('border-cyan-accent text-cyan-accent bg-cyan-accent/10', 'border-white/15 text-gray-400');
+    });
+    btn.classList.add('border-cyan-accent', 'text-cyan-accent', 'bg-cyan-accent/10');
+    const filter = btn.getAttribute('data-filter');
+    document.querySelectorAll('.ws-card').forEach(card => {
+      if (filter === 'All' || card.getAttribute('data-category') === filter) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+});
+</script>
+{% endblock %}

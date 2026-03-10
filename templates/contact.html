@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% block title %}Contact | Heart Disease Risk Factor Analysis{% endblock %}
+
+{% block content %}
+<!-- PAGE HERO -->
+<section class="page-hero grid-bg">
+  <div class="max-w-4xl mx-auto px-6">
+    <div class="badge mb-6 inline-flex"><i class="fas fa-envelope text-xs"></i> Contact Us</div>
+    <h1 class="section-title mb-4">Get In Touch</h1>
+    <p class="section-subtitle">Have questions about our analysis, want to collaborate, or provide feedback? We'd love to hear from you.</p>
+  </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section class="py-20 px-6">
+  <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-12">
+
+    <!-- LEFT: Contact Info -->
+    <div class="lg:col-span-2" data-aos="fade-right">
+      <h2 class="text-2xl font-bold mb-6">Contact Information</h2>
+      <p class="text-gray-400 mb-8 leading-relaxed font-inter">Reach out to our team for collaboration opportunities, data sharing, or inquiries about the heart disease analysis project.</p>
+
+      <div class="space-y-5 mb-10">
+        {% for icon, label, value, color in [
+          ('fas fa-envelope','Email','abhinavsinghdevs@gmail.com','#00F5D4'),
+          ('fas fa-map-marker-alt','Location','KIET Deemed to be University','#E63946'),
+          ('fas fa-clock','Response Time','Within 24-48 hours','#F59E0B'),
+          ('fab fa-github','GitHub','github.com/itsabhinavdevs','#8B5CF6'),
+        ] %}
+        <div class="flex items-start gap-4">
+          <div class="w-11 h-11 rounded-xl flex items-center justify-center shrink-0" style="background:{{ color }}12;border:1px solid {{ color }}25;">
+            <i class="{{ icon }}" style="color:{{ color }};"></i>
+          </div>
+          <div>
+            <p class="text-xs text-gray-500 uppercase tracking-widest mb-1">{{ label }}</p>
+            <p class="font-medium text-sm">{{ value }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+      <!-- Social links -->
+      <div>
+        <p class="text-xs text-gray-500 uppercase tracking-widest mb-4">Follow Us</p>
+        <div class="flex gap-3">
+          {% for icon, label in [('fab fa-github','https://github.com/itsabhinavdevs'),('fab fa-linkedin-in','https://www.linkedin.com/in/itsabhinavdevs/'),('fab fa-twitter','https://x.com/itsAbhinavDev'),('fas fa-globe','https://www.linkedin.com/in/itsabhinavdevs/')] %}
+          <a href="{{ label }}" class="w-11 h-11 rounded-xl flex items-center justify-center border border-white/10 text-gray-400 hover:text-cyan-accent hover:border-cyan-accent/50 transition-all">
+            <i class="{{ icon }}"></i>
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Contact Form -->
+    <div class="lg:col-span-3" data-aos="fade-left">
+      <div class="glass-card p-8">
+        <h2 class="text-xl font-bold mb-6">Send a Message</h2>
+        <form id="contact-form" class="space-y-5">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div>
+              <label class="block text-xs text-gray-500 uppercase tracking-widest mb-2">Your Name *</label>
+              <input type="text" name="name" required placeholder="Abhinav"
+                class="contact-input" autocomplete="off"/>
+            </div>
+            <div>
+              <label class="block text-xs text-gray-500 uppercase tracking-widest mb-2">Email Address *</label>
+              <input type="email" name="email" required placeholder="abhi@example.com"
+                class="contact-input" autocomplete="off"/>
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs text-gray-500 uppercase tracking-widest mb-2">Subject</label>
+            <select name="subject" class="contact-input cursor-pointer">
+              <option value="" class="bg-secondary-bg">Select a topic</option>
+              <option value="collaboration" class="bg-secondary-bg">Research Collaboration</option>
+              <option value="data" class="bg-secondary-bg">Data Inquiry</option>
+              <option value="feedback" class="bg-secondary-bg">Project Feedback</option>
+              <option value="general" class="bg-secondary-bg">General Question</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs text-gray-500 uppercase tracking-widest mb-2">Message *</label>
+            <textarea name="message" required rows="6" placeholder="Your message here..."
+              class="contact-input resize-none" style="resize:none;"></textarea>
+          </div>
+          <button type="submit" class="btn-primary w-full flex items-center justify-center gap-2 text-base py-3.5">
+            <i class="fas fa-paper-plane"></i> Send Message
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP SECTION -->
+<section class="py-12 px-6">
+  <div class="max-w-6xl mx-auto" data-aos="fade-up">
+    <div class="text-center mb-8">
+      <p class="section-label">Location</p>
+      <h2 class="section-title mb-2">Find Us</h2>
+    </div>
+    <div class="tableau-container overflow-hidden" style="height:400px;">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387193.30593852856!2d-74.25986548248684!3d40.69714941932609!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2s!4v1699999999999"
+        width="100%" height="400" style="border:none; filter: invert(0.9) hue-rotate(180deg) saturate(0.5);">
+      </iframe>
+    </div>
+    <p class="text-xs text-gray-600 text-center mt-3 font-inter">
+      <i class="fas fa-info-circle mr-1"></i> Update Google Maps embed src with your actual location
+    </p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="py-16 px-6 bg-secondary-bg/30">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-10" data-aos="fade-up">
+      <p class="section-label">FAQ</p>
+      <h2 class="section-title mb-4">Frequently Asked Questions</h2>
+    </div>
+    <div class="space-y-4">
+      {% for q, a in [
+        ('Is this project open source?','Yes, the web application code is available on GitHub. The Tableau visualizations are published publicly on Tableau Public.'),
+        ('Can I use this data for research?','The underlying data comes from the CDC BRFSS survey and is publicly available. Please cite the original source and our analysis if using it for research.'),
+        ('How was the dataset processed?','We used Python (Pandas, NumPy) for data cleaning, handling missing values, and feature engineering before importing into Tableau for visualization.'),
+        ('Can I replicate this analysis?','Absolutely. The methodology is documented in our About page, and the dataset is available on Kaggle. We encourage replication and extension of this work.'),
+      ] %}
+      <details class="glass-card p-5 group cursor-pointer" data-aos="fade-up" data-aos-delay="{{ loop.index0 * 80 }}">
+        <summary class="flex items-center justify-between font-semibold text-sm list-none">
+          <span>{{ q }}</span>
+          <i class="fas fa-chevron-down text-cyan-accent text-xs transition-transform group-open:rotate-180"></i>
+        </summary>
+        <p class="mt-4 text-gray-400 text-sm leading-relaxed font-inter border-t border-white/5 pt-4">{{ a }}</p>
+      </details>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}

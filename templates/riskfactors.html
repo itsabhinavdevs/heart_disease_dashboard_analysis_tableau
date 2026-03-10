@@ -1,0 +1,202 @@
+{% extends "base.html" %}
+{% block title %}Risk Factors | Heart Disease Risk Factor Analysis{% endblock %}
+
+{% block content %}
+<!-- PAGE HERO -->
+<section class="page-hero grid-bg">
+  <div class="max-w-4xl mx-auto px-6">
+    <div class="badge mb-6 inline-flex"><i class="fas fa-exclamation-triangle text-xs"></i> Risk Factors</div>
+    <h1 class="section-title mb-4">Heart Disease Risk Factors</h1>
+    <p class="section-subtitle">Explore the major factors that contribute to heart disease risk, backed by data from 319,000+ patient records.</p>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="py-16 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="glass-card p-8 flex flex-col md:flex-row items-center gap-8" data-aos="fade-up">
+      <div class="w-20 h-20 rounded-2xl flex items-center justify-center shrink-0" style="background:rgba(230,57,70,0.1);border:1px solid rgba(230,57,70,0.3);">
+        <i class="fas fa-heartbeat text-4xl text-med-red"></i>
+      </div>
+      <div>
+        <h2 class="text-2xl font-bold mb-3">Understanding Risk Factors</h2>
+        <p class="text-gray-400 leading-relaxed font-inter">Heart disease risk is multifactorial — influenced by demographic characteristics, lifestyle choices, and underlying health conditions. Our analysis of over 319,000 patients reveals significant correlations between these factors and heart disease outcomes. Understanding these risks enables better prevention strategies and targeted interventions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RISK FACTORS GRID -->
+<section class="py-12 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      {% set factors = [
+        {
+          'icon': 'fas fa-birthday-cake',
+          'title': 'Age',
+          'color': '#E63946',
+          'risk_level': 'High',
+          'stat': '2x risk after 50',
+          'desc': 'Age is one of the strongest predictors of heart disease. Risk increases significantly after age 50 and continues to rise with each decade. Aging affects cardiovascular health through arterial stiffening, reduced heart efficiency, and accumulated damage.',
+          'bullets': ['Risk doubles every decade after 40','Post-menopausal women face increased risk','Older age correlates with comorbidities']
+        },
+        {
+          'icon': 'fas fa-smoking',
+          'title': 'Smoking',
+          'color': '#F97316',
+          'risk_level': 'High',
+          'stat': '40% higher risk',
+          'desc': 'Smoking is a leading modifiable risk factor for heart disease. Tobacco chemicals damage blood vessel walls, promote plaque buildup, reduce oxygen in blood, and cause irregular heartbeats that increase cardiovascular risk.',
+          'bullets': ['Damages arterial lining','Reduces good cholesterol (HDL)','Risk decreases after quitting smoking']
+        },
+        {
+          'icon': 'fas fa-wine-glass',
+          'title': 'Alcohol Consumption',
+          'color': '#8B5CF6',
+          'risk_level': 'Moderate',
+          'stat': 'Dose-dependent effect',
+          'desc': 'Alcohol has a complex relationship with heart disease. Heavy drinking raises blood pressure and causes cardiomyopathy, while moderate consumption shows mixed evidence with some studies suggesting mild protective effects.',
+          'bullets': ['Heavy drinking increases risk significantly','Raises triglyceride levels','Contributes to obesity and hypertension']
+        },
+        {
+          'icon': 'fas fa-syringe',
+          'title': 'Diabetes',
+          'color': '#EF4444',
+          'risk_level': 'Very High',
+          'stat': '2.8x increased risk',
+          'desc': 'Diabetics face nearly three times the heart disease risk of non-diabetics. High blood glucose damages blood vessels and nerves controlling the heart. Type 2 diabetes often coexists with hypertension and obesity, compounding cardiovascular risk.',
+          'bullets': ['Damages blood vessels over time','Often co-occurs with hypertension','Metabolic syndrome multiplies risk']
+        },
+        {
+          'icon': 'fas fa-running',
+          'title': 'Physical Activity',
+          'color': '#10B981',
+          'risk_level': 'Protective',
+          'stat': '30% risk reduction',
+          'desc': 'Regular physical activity is one of the most powerful protective factors against heart disease. Exercise strengthens the heart muscle, lowers blood pressure, improves cholesterol profiles, and helps maintain a healthy body weight.',
+          'bullets': ['30 min/day reduces risk by 30%','Strengthens heart muscle','Improves insulin sensitivity']
+        },
+        {
+          'icon': 'fas fa-weight',
+          'title': 'BMI (Obesity)',
+          'color': '#F59E0B',
+          'risk_level': 'High',
+          'stat': 'BMI >30 doubles risk',
+          'desc': 'Elevated BMI, particularly obesity (BMI ≥ 30), significantly increases heart disease risk. Excess body fat, especially visceral fat around the abdomen, promotes inflammation, insulin resistance, hypertension, and dyslipidemia.',
+          'bullets': ['BMI >30 doubles cardiovascular risk','Abdominal obesity most dangerous','Associated with sleep apnea and hypertension']
+        },
+        {
+          'icon': 'fas fa-brain',
+          'title': 'Stroke History',
+          'color': '#EC4899',
+          'risk_level': 'Very High',
+          'stat': '3x comorbidity rate',
+          'desc': 'Individuals with a history of stroke face substantially elevated heart disease risk. Stroke and heart disease share common risk factors and underlying pathological mechanisms, including atherosclerosis, hypertension, and atrial fibrillation.',
+          'bullets': ['Shared risk factors with heart disease','Atrial fibrillation links both conditions','Strong predictor of future cardiac events']
+        },
+        {
+          'icon': 'fas fa-venus-mars',
+          'title': 'Sex / Gender',
+          'color': '#00F5D4',
+          'risk_level': 'Moderate',
+          'stat': 'Men 2x more affected',
+          'desc': 'Biological sex influences heart disease risk in complex ways. Men generally face higher risk at younger ages, while women\'s risk increases significantly after menopause. Hormonal differences, symptom presentation, and treatment responses vary by sex.',
+          'bullets': ['Men more affected before age 65','Post-menopausal women catch up in risk','Estrogen offers some pre-menopausal protection']
+        },
+        {
+          'icon': 'fas fa-palette',
+          'title': 'Race / Ethnicity',
+          'color': '#6366F1',
+          'risk_level': 'Moderate',
+          'stat': 'Varies by population',
+          'desc': 'Heart disease rates vary significantly across racial and ethnic groups due to genetic predispositions, social determinants of health, healthcare access disparities, and differential exposure to risk factors in different communities.',
+          'bullets': ['African Americans face highest rates','Genetic and socioeconomic factors interact','Healthcare access disparities play a role']
+        },
+      ] %}
+
+      {% for f in factors %}
+      <div class="risk-card group" data-aos="fade-up" data-aos-delay="{{ loop.index0 * 80 }}">
+        <!-- Header -->
+        <div class="flex items-start justify-between mb-4">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background:{{ f.color }}1a;border:1px solid {{ f.color }}40;">
+            <i class="{{ f.icon }} text-xl" style="color:{{ f.color }};"></i>
+          </div>
+          <span class="text-xs font-semibold px-3 py-1 rounded-full"
+            style="background:{{ f.color }}20;color:{{ f.color }};border:1px solid {{ f.color }}40;">
+            {{ f.risk_level }}
+          </span>
+        </div>
+        <!-- Title & Stat -->
+        <h3 class="text-xl font-bold mb-1">{{ f.title }}</h3>
+        <p class="text-xs font-semibold mb-3" style="color:{{ f.color }};">{{ f.stat }}</p>
+        <!-- Description -->
+        <p class="text-gray-400 text-sm leading-relaxed mb-4 font-inter">{{ f.desc }}</p>
+        <!-- Bullets -->
+        <ul class="space-y-1.5">
+          {% for b in f.bullets %}
+          <li class="flex items-start gap-2 text-xs text-gray-500">
+            <i class="fas fa-check-circle mt-0.5 shrink-0" style="color:{{ f.color }};"></i>
+            {{ b }}
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+</section>
+
+<!-- RISK SUMMARY TABLE -->
+<section class="py-16 px-6">
+  <div class="max-w-5xl mx-auto" data-aos="fade-up">
+    <div class="text-center mb-10">
+      <p class="section-label">Summary</p>
+      <h2 class="section-title mb-4">Risk Factor Comparison</h2>
+    </div>
+    <div class="glass-card overflow-hidden">
+      <table class="w-full">
+        <thead>
+          <tr class="border-b border-white/10">
+            <th class="p-4 text-left text-xs uppercase tracking-widest text-gray-500">Risk Factor</th>
+            <th class="p-4 text-center text-xs uppercase tracking-widest text-gray-500">Risk Level</th>
+            <th class="p-4 text-center text-xs uppercase tracking-widest text-gray-500">Modifiable</th>
+            <th class="p-4 text-left text-xs uppercase tracking-widest text-gray-500">Impact</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-white/5">
+          {% for row in [
+            ('Age','Very High','No','Doubles risk after 50'),
+            ('Smoking','High','Yes','40% higher risk'),
+            ('Diabetes','Very High','Manageable','2.8x multiplier'),
+            ('Physical Inactivity','High','Yes','30% reduction if active'),
+            ('Obesity (BMI)','High','Yes','Doubles risk at BMI>30'),
+            ('Stroke History','Very High','No','3x comorbidity'),
+            ('Alcohol','Moderate','Yes','Dose-dependent'),
+            ('Gender','Moderate','No','Men 2x more at young age'),
+          ] %}
+          <tr class="hover:bg-white/3 transition-colors">
+            <td class="p-4 font-medium">{{ row[0] }}</td>
+            <td class="p-4 text-center">
+              <span class="px-3 py-1 rounded-full text-xs font-semibold
+                {% if 'Very' in row[1] %}bg-red-500/20 text-red-400
+                {% elif 'High' in row[1] %}bg-orange-500/20 text-orange-400
+                {% else %}bg-yellow-500/20 text-yellow-400{% endif %}">
+                {{ row[1] }}
+              </span>
+            </td>
+            <td class="p-4 text-center">
+              {% if row[2] == 'Yes' %}<i class="fas fa-check-circle text-green-400"></i>
+              {% elif row[2] == 'Manageable' %}<i class="fas fa-adjust text-yellow-400"></i>
+              {% else %}<i class="fas fa-times-circle text-red-400"></i>{% endif %}
+            </td>
+            <td class="p-4 text-gray-400 text-sm">{{ row[3] }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+{% endblock %}

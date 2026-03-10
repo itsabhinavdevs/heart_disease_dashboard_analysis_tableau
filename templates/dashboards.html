@@ -1,0 +1,211 @@
+{% extends "base.html" %}
+{% block title %}Dashboards | Heart Disease Risk Factor Analysis{% endblock %}
+
+{% block content %}
+<!-- MODAL -->
+<div id="viz-modal" class="modal-overlay">
+  <div class="modal-box">
+    <div class="flex items-start justify-between mb-6">
+      <div>
+        <h2 id="modal-title" class="text-2xl font-bold mb-1"></h2>
+        <p id="modal-desc" class="text-gray-400 text-sm font-inter"></p>
+      </div>
+      <button onclick="closeModal()" class="w-10 h-10 rounded-xl flex items-center justify-center border border-white/10 hover:border-red-500/50 hover:bg-red-500/10 transition-all text-gray-400 hover:text-red-400">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="tableau-container">
+      <iframe id="modal-iframe" src="" width="100%" height="750" style="border:none;"></iframe>
+    </div>
+    <p class="text-xs text-gray-600 mt-4 text-center font-inter">Replace iframe src with your actual Tableau Public dashboard URL</p>
+  </div>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero grid-bg">
+  <div class="max-w-4xl mx-auto px-6">
+    <div class="badge mb-6 inline-flex"><i class="fas fa-th-large text-xs"></i> Analytics Dashboards</div>
+    <h1 class="section-title mb-4">Interactive Dashboards</h1>
+    <p class="section-subtitle">Three comprehensive Tableau dashboards providing multi-dimensional analysis of heart disease risk factors across the patient population.</p>
+  </div>
+</section>
+
+<!-- DASHBOARDS -->
+<section class="py-20 px-6">
+  <div class="max-w-7xl mx-auto space-y-10">
+
+    <!-- DASHBOARD 1 -->
+    <div class="cyan-glow-card overflow-hidden" data-aos="fade-up">
+      <div class="grid grid-cols-1 lg:grid-cols-5">
+        <!-- Left info panel -->
+        <div class="lg:col-span-2 p-8 lg:p-10 flex flex-col justify-between border-r border-white/5">
+          <div>
+            <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-6" style="background:rgba(0,245,212,0.1);border:1px solid rgba(0,245,212,0.25);">
+              <i class="fas fa-users text-2xl text-cyan-accent"></i>
+            </div>
+            <span class="text-xs text-cyan-accent font-semibold tracking-widest uppercase mb-3 block">Dashboard 01</span>
+            <h2 class="text-2xl font-bold mb-4">Demographic & Lifestyle Factors</h2>
+            <p class="text-gray-400 leading-relaxed mb-6 font-inter text-sm">
+              An overview of how demographic characteristics — including age, sex, and race — combined with lifestyle factors such as smoking, alcohol consumption, and physical activity influence heart disease prevalence across the population.
+            </p>
+            <div class="space-y-3 mb-8">
+              {% for item in ['Age distribution of heart disease patients','Gender-wise prevalence analysis','Racial & ethnic disparities','Smoking and alcohol correlation','Physical activity impact'] %}
+              <div class="flex items-center gap-3 text-sm text-gray-400">
+                <i class="fas fa-chart-bar text-cyan-accent text-xs"></i>{{ item }}
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          <button onclick="openModal('Demographic & Lifestyle Factors Dashboard','https://public.tableau.com/views/heart_disease_dashboards_17731394056670/Dashboard1?:embed=y&:showVizHome=no')"
+            class="btn-primary flex items-center justify-center gap-2">
+            <i class="fas fa-expand-alt"></i> Open Full Dashboard
+          </button>
+        </div>
+
+        <!-- Right preview -->
+        <div class="lg:col-span-3 p-6 flex items-center justify-center min-h-64 relative bg-secondary-bg/50">
+          <div class="w-full">
+            <!-- Placeholder Dashboard Preview -->
+            <div class="w-full h-64 rounded-xl overflow-hidden relative" style="background:linear-gradient(135deg,#0D1B2A,#1B263B);">
+              <svg class="w-full h-full opacity-30" viewBox="0 0 600 250">
+                <!-- Bar chart mockup -->
+                <rect x="40" y="180" width="40" height="60" fill="#00F5D4" opacity="0.6" rx="4"/>
+                <rect x="100" y="140" width="40" height="100" fill="#00F5D4" opacity="0.8" rx="4"/>
+                <rect x="160" y="100" width="40" height="140" fill="#E63946" opacity="0.7" rx="4"/>
+                <rect x="220" y="120" width="40" height="120" fill="#00F5D4" opacity="0.6" rx="4"/>
+                <rect x="280" y="80" width="40" height="160" fill="#E63946" opacity="0.9" rx="4"/>
+                <rect x="340" y="110" width="40" height="130" fill="#00F5D4" opacity="0.7" rx="4"/>
+                <rect x="400" y="150" width="40" height="90" fill="#E63946" opacity="0.5" rx="4"/>
+                <rect x="460" y="90" width="40" height="150" fill="#00F5D4" opacity="0.8" rx="4"/>
+                <!-- Line -->
+                <polyline points="60,160 120,130 180,90 240,105 300,70 360,95 420,120 480,80" fill="none" stroke="#E63946" stroke-width="2"/>
+                <!-- Grid lines -->
+                <line x1="30" y1="80" x2="530" y2="80" stroke="white" stroke-width="0.3" opacity="0.3"/>
+                <line x1="30" y1="130" x2="530" y2="130" stroke="white" stroke-width="0.3" opacity="0.3"/>
+                <line x1="30" y1="180" x2="530" y2="180" stroke="white" stroke-width="0.3" opacity="0.3"/>
+              </svg>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div class="text-center">
+                  <i class="fas fa-chart-bar text-4xl text-cyan-accent/40 mb-2 block"></i>
+                  <p class="text-gray-600 text-xs">Click "Open Full Dashboard" to view</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DASHBOARD 2 -->
+    <div class="red-glow-card overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+      <div class="grid grid-cols-1 lg:grid-cols-5">
+        <div class="lg:col-span-2 p-8 lg:p-10 flex flex-col justify-between border-r border-white/5">
+          <div>
+            <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-6" style="background:rgba(230,57,70,0.1);border:1px solid rgba(230,57,70,0.25);">
+              <i class="fas fa-stethoscope text-2xl text-med-red"></i>
+            </div>
+            <span class="text-xs text-med-red font-semibold tracking-widest uppercase mb-3 block">Dashboard 02</span>
+            <h2 class="text-2xl font-bold mb-4">Health Conditions & Population Analysis</h2>
+            <p class="text-gray-400 leading-relaxed mb-6 font-inter text-sm">
+              Deep dive into health conditions including diabetes, stroke, general health status, mental health, and their compounding effects on heart disease risk across the entire study population.
+            </p>
+            <div class="space-y-3 mb-8">
+              {% for item in ['Diabetes prevalence among heart patients','Stroke comorbidity analysis','General & mental health indicators','Population segmentation by health status','Condition interaction heatmap'] %}
+              <div class="flex items-center gap-3 text-sm text-gray-400">
+                <i class="fas fa-heartbeat text-med-red text-xs"></i>{{ item }}
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          <button onclick="openModal('Health Conditions & Population Analysis Dashboard','https://public.tableau.com/views/heart_disease_dashboards_17731394056670/Dashboard2?:embed=y&:showVizHome=no')"
+            class="btn-primary flex items-center justify-center gap-2">
+            <i class="fas fa-expand-alt"></i> Open Full Dashboard
+          </button>
+        </div>
+        <div class="lg:col-span-3 p-6 flex items-center justify-center min-h-64 relative bg-secondary-bg/50">
+          <div class="w-full">
+            <div class="w-full h-64 rounded-xl overflow-hidden relative" style="background:linear-gradient(135deg,#0D1B2A,#1B263B);">
+              <svg class="w-full h-full opacity-30" viewBox="0 0 600 250">
+                <!-- Donut chart mockup -->
+                <circle cx="150" cy="125" r="80" fill="none" stroke="#E63946" stroke-width="20" stroke-dasharray="251 502" stroke-dashoffset="0"/>
+                <circle cx="150" cy="125" r="80" fill="none" stroke="#00F5D4" stroke-width="20" stroke-dasharray="150 502" stroke-dashoffset="-251"/>
+                <circle cx="150" cy="125" r="80" fill="none" stroke="#8B5CF6" stroke-width="20" stroke-dasharray="101 502" stroke-dashoffset="-401"/>
+                <!-- Scatter points -->
+                <circle cx="350" cy="80" r="8" fill="#E63946" opacity="0.8"/>
+                <circle cx="380" cy="120" r="12" fill="#00F5D4" opacity="0.6"/>
+                <circle cx="410" cy="60" r="6" fill="#E63946" opacity="0.9"/>
+                <circle cx="450" cy="140" r="15" fill="#8B5CF6" opacity="0.5"/>
+                <circle cx="490" cy="90" r="9" fill="#00F5D4" opacity="0.7"/>
+                <circle cx="390" cy="170" r="11" fill="#E63946" opacity="0.6"/>
+                <circle cx="430" cy="100" r="7" fill="#F59E0B" opacity="0.8"/>
+                <circle cx="470" cy="150" r="13" fill="#00F5D4" opacity="0.5"/>
+              </svg>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div class="text-center">
+                  <i class="fas fa-stethoscope text-4xl text-med-red/40 mb-2 block"></i>
+                  <p class="text-gray-600 text-xs">Click "Open Full Dashboard" to view</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DASHBOARD 3 -->
+    <div class="cyan-glow-card overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+      <div class="grid grid-cols-1 lg:grid-cols-5">
+        <div class="lg:col-span-2 p-8 lg:p-10 flex flex-col justify-between border-r border-white/5">
+          <div>
+            <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-6" style="background:rgba(0,245,212,0.1);border:1px solid rgba(0,245,212,0.25);">
+              <i class="fas fa-weight text-2xl text-cyan-accent"></i>
+            </div>
+            <span class="text-xs text-cyan-accent font-semibold tracking-widest uppercase mb-3 block">Dashboard 03</span>
+            <h2 class="text-2xl font-bold mb-4">BMI & Stroke Risk Analysis</h2>
+            <p class="text-gray-400 leading-relaxed mb-6 font-inter text-sm">
+              Focused analysis of body mass index distribution, obesity categories, and their relationship with stroke history in heart disease patients — identifying the highest-risk BMI profiles.
+            </p>
+            <div class="space-y-3 mb-8">
+              {% for item in ['BMI category distribution','Obesity & heart disease correlation','Stroke risk by BMI group','Age-BMI interaction analysis','Weight management insights'] %}
+              <div class="flex items-center gap-3 text-sm text-gray-400">
+                <i class="fas fa-weight text-cyan-accent text-xs"></i>{{ item }}
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          <button onclick="openModal('BMI & Stroke Risk Analysis Dashboard','https://public.tableau.com/views/heart_disease_dashboards_17731394056670/Dashboard3?:embed=y&:showVizHome=no')"
+            class="btn-primary flex items-center justify-center gap-2">
+            <i class="fas fa-expand-alt"></i> Open Full Dashboard
+          </button>
+        </div>
+        <div class="lg:col-span-3 p-6 flex items-center justify-center min-h-64 relative bg-secondary-bg/50">
+          <div class="w-full">
+            <div class="w-full h-64 rounded-xl overflow-hidden relative" style="background:linear-gradient(135deg,#0D1B2A,#1B263B);">
+              <svg class="w-full h-full opacity-30" viewBox="0 0 600 250">
+                <!-- Area chart mockup -->
+                <defs>
+                  <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#00F5D4" stop-opacity="0.4"/>
+                    <stop offset="100%" stop-color="#00F5D4" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <polygon points="0,240 0,160 80,120 160,100 240,80 320,60 400,90 480,70 560,50 560,240" fill="url(#areaGrad)"/>
+                <polyline points="0,160 80,120 160,100 240,80 320,60 400,90 480,70 560,50" fill="none" stroke="#00F5D4" stroke-width="2.5"/>
+                <polygon points="0,240 0,190 80,175 160,180 240,150 320,160 400,140 480,155 560,130 560,240" fill="rgba(230,57,70,0.15)"/>
+                <polyline points="0,190 80,175 160,180 240,150 320,160 400,140 480,155 560,130" fill="none" stroke="#E63946" stroke-width="2"/>
+              </svg>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div class="text-center">
+                  <i class="fas fa-weight text-4xl text-cyan-accent/40 mb-2 block"></i>
+                  <p class="text-gray-600 text-xs">Click "Open Full Dashboard" to view</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock %}
