@@ -1,74 +1,159 @@
 # ❤️ Heart Disease Risk Factor Analysis
 
-A futuristic, premium analytics platform for exploring heart disease risk factors through interactive Tableau visualizations.
+> An interactive analytics platform to explore and visualize heart
+> disease risk factors using modern web technologies and Tableau.
 
-## 🚀 Quick Start
+------------------------------------------------------------------------
 
-### 1. Install Dependencies
-```bash
+## 🌟 Overview
+
+This project is a **data-driven web application** that helps users
+understand key **heart disease risk factors** through **interactive
+dashboards and visual storytelling**.
+
+It combines the power of **Python Flask** and **Tableau visualizations**
+to deliver meaningful insights in an intuitive interface.
+
+------------------------------------------------------------------------
+
+## 🚀 Features
+
+-   📊 Interactive Tableau dashboards\
+-   📈 Risk factor analysis (age, cholesterol, BP, etc.)\
+-   🎯 Insight-driven storytelling\
+-   ⚡ Smooth animations and modern UI\
+-   🌐 Fully responsive web design
+
+------------------------------------------------------------------------
+
+## 🖥️ Demo
+
+🎥 Watch the full project demo here:\
+👉
+https://drive.google.com/file/d/11qvnoEn0gTZMAb1edTeqOb-5kntA5jX4/view?usp=sharing
+
+------------------------------------------------------------------------
+
+## ⚙️ Installation & Setup
+
+### 1️⃣ Clone the Repository
+
+``` bash
+git clone https://github.com/your-username/heart-disease-analysis.git
+cd heart-disease-analysis
+```
+
+### 2️⃣ Install Dependencies
+
+``` bash
 pip install -r requirements.txt
 ```
 
-### 2. Run the Flask App
-```bash
+### 3️⃣ Run the Application
+
+``` bash
 python app.py
 ```
 
-### 3. Open in Browser
-```
+### 4️⃣ Open in Browser
+
 http://127.0.0.1:5000
-```
 
----
+------------------------------------------------------------------------
 
-## 📁 Project Structure
+## 📂 Project Structure
 
-```
-heart_disease_project/
-├── app.py                  # Flask application
-├── requirements.txt        # Python dependencies
-├── templates/
-│   ├── base.html           # Base layout (navbar, footer, loader)
-│   ├── index.html          # Home page
-│   ├── about.html          # About project
-│   ├── riskfactors.html    # Risk factors grid
-│   ├── worksheets.html     # Visualization gallery
-│   ├── dashboards.html     # Dashboard cards
-│   ├── story.html          # Tableau story presentation
-│   ├── insights.html       # Key findings
-│   ├── team.html           # Team members
-│   └── contact.html        # Contact form
-└── static/
-    ├── css/
-    │   └── main.css        # Global styles
-    └── js/
-        └── main.js         # Animations & interactions
-```
+    heart_disease_project/
+    │
+    ├── app.py
+    ├── requirements.txt
+    │
+    ├── templates/
+    │   ├── base.html
+    │   ├── index.html
+    │   ├── about.html
+    │   ├── riskfactors.html
+    │   ├── worksheets.html
+    │   ├── dashboards.html
+    │   ├── story.html
+    │   ├── insights.html
+    │   ├── team.html
+    │   └── contact.html
+    │
+    └── static/
+        ├── css/
+        │   └── main.css
+        └── js/
+            └── main.js
 
----
-
+------------------------------------------------------------------------
 
 ## 🛠️ Tech Stack
 
-- **Backend**: Python Flask
-- **Frontend**: HTML5, CSS3, Tailwind CSS, JavaScript
-- **Animations**: GSAP 3, AOS, Particles.js
-- **Icons**: Font Awesome 6
-- **Fonts**: Poppins, Inter
-- **Visualizations**: Tableau Public (embedded iframes)
+### 🔙 Backend
 
----
+-   Python\
+-   Flask
 
-## 🎥 Project Demonstration Video
+### 🎨 Frontend
 
-You can watch the full demonstration of the **Heart Disease Analysis Project** in the video below.
+-   HTML5\
+-   CSS3\
+-   Tailwind CSS\
+-   JavaScript
 
-🔗 **Click here to watch the demo:**  
-[Project Demonstration Video](https://drive.google.com/file/d/11qvnoEn0gTZMAb1edTeqOb-5kntA5jX4/view?usp=sharing)
+### ✨ Libraries & Tools
 
-The video explains the working of the project, including:
-- Data visualization dashboard
-- Different health parameters analysis
-- Interactive charts and insights
-- Overall functionality of the web application
----
+-   GSAP 3\
+-   AOS\
+-   Particles.js\
+-   Font Awesome\
+-   Google Fonts
+
+### 📊 Data Visualization
+
+-   Tableau Public
+
+------------------------------------------------------------------------
+
+## 📊 Key Insights
+
+-   Identification of major risk factors for heart disease\
+-   Comparative analysis across patient attributes\
+-   Visual patterns for better medical understanding\
+-   Interactive exploration of healthcare data
+
+------------------------------------------------------------------------
+
+## 📌 Use Cases
+
+-   Academic projects\
+-   Data visualization practice\
+-   Healthcare analytics demonstration\
+-   Portfolio project for students
+
+------------------------------------------------------------------------
+
+## 👥 Team
+
+-   Your Name\
+-   Team Member 2\
+-   Team Member 3
+
+------------------------------------------------------------------------
+
+## 📬 Contact
+
+For any queries or suggestions, feel free to reach out.
+
+------------------------------------------------------------------------
+
+## ⭐ Support
+
+If you like this project, consider giving it a ⭐ on GitHub!
+
+------------------------------------------------------------------------
+
+## 📜 License
+
+This project is open-source and available under the MIT License.
